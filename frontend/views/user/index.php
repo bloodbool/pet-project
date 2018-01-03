@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'url',
             [
                 'attribute' => 'username',
                 'format' => 'raw',
@@ -34,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return  "<a href='/user/update/". $user->id ."' >" .  $user->username .  "</a>";
                 }
             ],
-
             'auth_key',
             'password_hash',
             'password_reset_token',
