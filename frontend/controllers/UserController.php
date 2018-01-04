@@ -8,6 +8,7 @@ use app\models\UserShow;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -87,8 +88,17 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $file = UploadedFile::getInstance($model, 'url');
+            if($file) {
+                $filename = $file->getBaseName(). '.' . $file->getExtension();
+                $file->saveAs('/var/www/petproject.local/frontend/web/uploads/'. $filename);
+                $model->url='/uploads/'. $filename;
+            }
+            if($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render('update', [
@@ -125,4 +135,8 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+
+
 }

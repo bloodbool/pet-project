@@ -29,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'url',
+            [
+                'attribute' => 'url',
+                'format' => 'raw',
+                'value' => function ($user) {
+
+                    return  "<img src='http://petproject.local". $user->url ."' >";
+                }
+            ],
             'username',
             'auth_key',
             'password_hash',

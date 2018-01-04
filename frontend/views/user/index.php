@@ -26,20 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'url',
             [
-                'attribute' => 'username',
+                'attribute' => 'url',
                 'format' => 'raw',
-                'value' => function ($user, $b, $c) {
+                'value' => function ($user) {
 
-                    return  "<a href='/user/update/". $user->id ."' >" .  $user->username .  "</a>";
+                    return  "<img src='http://petproject.local". $user->url ."' >";
                 }
             ],
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
+            'username',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
             'email:email',
-            'status',
+            //'status',
             [
                 'attribute' => 'created_at',
                 'value' => function ($user) {

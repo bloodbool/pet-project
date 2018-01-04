@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\file\FileInput;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
@@ -10,10 +11,30 @@ use yii\widgets\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();
+    $config = ($model->url) ? [ $model->url ] : [];
+
+    ?>
 
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <!-- Загрузка картинки пользователя-->
+    <?=
+    $form->field($model, 'url')->widget(FileInput::className(), [
+        'language' => 'ru',
+        'options' => ['accept' => 'image/*', ],
+        'pluginOptions' => [
+            'initialPreview'=> $config,
+            'initialPreviewConfig' => [
+                'url' => '/delete'
+            ],
+            'initialPreviewAsData'=>true,
+            'initialCaption'=>"Image",
+            'overwriteInitial'=>false,
+            'maxFileSize'=>2800
+        ]
+
+    ]) ?>
+    <?= $form->field($model, 'url')->label(false)->hiddenInput() ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 

@@ -118,3 +118,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.grid-view img {
+    max-width: 50px;
+}
+
+.user-view img {
+    max-width: 50px;
+}
+
