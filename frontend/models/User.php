@@ -41,7 +41,8 @@ class User extends \yii\db\ActiveRecord
             [['username'], 'unique'],
             [['email'], 'unique'],
             [[ 'created_at', 'updated_at'], 'safe'],
-            [['password_reset_token'], 'unique'],
+            //[['password_reset_token'], 'skipOnEmpty' => true],
+            ['password_reset_token', 'default', 'value' => null],
         ];
     }
 
